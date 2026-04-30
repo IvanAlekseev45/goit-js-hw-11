@@ -26,9 +26,10 @@ function onFormSubmit(event) {
   getImagesByQuery(inputValue)
     .then(({ data: { hits } }) => {
       if (hits.length === 0) {
-        iziToast.error(
-          'Sorry, there are no images matching your search query. Please try again!'
-        );
+        iziToast.error({
+          message:
+            'Sorry, there are no images matching your search query. Please try again!',
+        });
       }
       createGallery(hits);
     })
