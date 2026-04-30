@@ -24,17 +24,18 @@ function onFormSubmit(event) {
   clearGallery();
   showLoader();
   getImagesByQuery(inputValue)
-    .then(({ data: { hits } }) => {
+    .then(({ hits }) => {
       if (hits.length === 0) {
         iziToast.error({
           message:
             'Sorry, there are no images matching your search query. Please try again!',
         });
+        return;
       }
       createGallery(hits);
     })
     .catch(err => {
-      console.log(err);
+      iziToast.error({ message: 'Something went wrong. Please try again' });
     })
     .finally(() => {
       hideLoader();
